@@ -5,8 +5,5 @@ def to_hex(r,g,b)
 end
 
 def to_ints(hex)
-    hex.scan(/\w\w/).map do |s|
-        s.hex
-    end
-    ints
+    hex.scan(/\w\w/).map(&:hex)
 end
