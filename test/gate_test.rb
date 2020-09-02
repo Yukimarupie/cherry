@@ -4,23 +4,26 @@ require './lib/gate/ticket'
 
 
 class GateTest < Minitest::Test
-    def test_gate
-        umeda = Gate.new(:umeda)
-        juso = Gate.new(:juso)
 
-        ticket = Ticket.new(150)
-        umeda.enter(ticket)
-        
-        assert juso.exit(ticket)
+    #Minitestでsetupメソッドを定義すると、テストメソッドの実行前に毎回setupメソッドが呼び出される
+    def setup
+        @umeda = Gate.new(:umeda)
+        @juso = Gate.new(:juso)
+        @mikuni = Gate.new(:mikuni)
     end
 
-    def test_umeda_to_mikuni_when_fare_is_not_enough
-        umeda = Gate.new(:umeda)
-        mikuni = Gate.new(:mikuni)
 
+    def test_umeda_to_juso
         ticket = Ticket.new(150)
-        umeda.enter(ticket)
+        @umeda.enter(ticket)
         
-        refute mikuni.exit(ticket)
+        assert @juso.exit(ticket)
+    end
+
+    def test_umeda_to_mikuni
+        ticket = Ticket.new(150)
+        @umeda.enter(ticket)
+
+        refute @mikuni.exit(ticket)
     end
 end
