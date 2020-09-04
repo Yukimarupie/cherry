@@ -6,8 +6,15 @@ module Greeter
     end
 end
 
-greeter = Greeter.new 
-#=> モジュールはインスタンスを作れないためエラーが出る
+begin
+    greeter = Greeter.new
+rescue
+    puts '例外が発生したが、このまま続行する'
+end
 
 puts 'End'
-#=> 上の行で例外が発生するため、これも実行されない
+
+#この場合の出力
+#Start
+#例外が発生したが、このまま続行する
+#End
